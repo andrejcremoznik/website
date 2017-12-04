@@ -1,0 +1,33 @@
+# crean theme English template
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en_US\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+# http://localization-guide.readthedocs.org/en/latest/l10n/pluralforms.html
+
+msgid "Sorry, no content."
+msgstr ""
+
+msgid "Missing page!"
+msgstr ""
+
+msgid "We couldn’t find any content at this address."
+msgstr ""
+
+msgid "Author"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "says"
+msgstr ""

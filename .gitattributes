@@ -1,0 +1,12 @@
+* text=auto
+
+setup.sh export-ignore
+README.md export-ignore
+LICENSE.md export-ignore
+
+sync.sh export-ignore
+config/scripts/ export-ignore
+web/app/uploads/ export-ignore
+web/app/themes/**/css/ export-ignore
+web/app/themes/**/js/ export-ignore
+
