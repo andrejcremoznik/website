@@ -16,6 +16,7 @@ class crean_Addons {
   public function run() {
     // Actions
     add_action('init',                        [$this, 'plugin_textdomain']);
+    add_action('init',                        [$this, 'enable_gist_embed']);
     // add_action('init',                        [$this, 'taxonomies'], 0);
     // add_action('init',                        [$this, 'post_types']);
     // add_action('pre_get_posts',               [$this, 'pre_get_posts']);
@@ -26,6 +27,8 @@ class crean_Addons {
     add_filter('body_class',                  [$this, 'body_class']);
     add_filter('jpeg_quality',                [$this, 'jpeg_quality'], 1, 0);
     add_filter('comment_form_default_fields', [$this, 'comment_form_default_fields']);
+
+
   }
 
   /**
@@ -138,6 +141,27 @@ class crean_Addons {
       unset($fields['url']);
     }
     return $fields;
+  }
+
+  /**
+   * Embed Gists
+   */
+  public function enable_gist_embed() {
+    if (!is_admin()) {
+      wp_embed_register_handler(
+        'gist',
+        '#(https://gist.github.com/([^\/]+\/)?([a-zA-Z0-9]+)(\/[a-zA-Z0-9]+)?)(\#file(\-|_)(.+))?$#i',
+        [$this, 'gist_embed_handler']
+      );
+    }
+  }
+  public function gist_embed_handler($matches, $attr, $url, $rawattr) {
+    //die(var_dump($matches));
+    return sprintf(
+      '<div><script src="%s.js%s"></script></div>',
+      $matches[1],
+      isset($matches[7]) ? '?file=' . $matches[7] : ''
+    );
   }
 
   /**
