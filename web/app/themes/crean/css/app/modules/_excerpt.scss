@@ -1,0 +1,20 @@
+.excerpt {
+  padding: $basic_offset;
+}
+
+.excerpt__title {
+  margin: 0;
+  > a { text-decoration: none; }
+}
+
+.excerpt__meta {
+  font-size: rem($font_s);
+  > div { display: inline-block; }
+}
+
+.excerpt__pubdate { margin-right: $basic_offset; }
+
+.excerpt__content {
+  @extend %post_content;
+  margin-top: $basic_offset;
+}

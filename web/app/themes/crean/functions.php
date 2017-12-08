@@ -86,7 +86,9 @@ class crean extends Timber\Site {
       'password' => __('Password', 'crean'),
       'submit' => __('Submit', 'crean'),
       'comments' => __('Comments', 'crean'),
-      'says' => __('says', 'crean')
+      'says' => __('says', 'crean'),
+      'published' => __('Published', 'crean'),
+      'tagged' => __('Tagged', 'crean')
     ];
     return $context;
   }

@@ -1,5 +1,9 @@
 // Typography
-html { font: #{$default_font_size}px/#{$default_line_height} $default_font_family; }
+html {
+  font-family: $default_font_family;
+  font-size: #{$default_font_size}px;
+  line-height: $default_line_height;
+}
 
 body {
   color: $default_tx_color;
@@ -27,26 +31,11 @@ h1 { font-size: rem($font_h1); }
 h2 { font-size: rem($font_h2); }
 h3 { font-size: rem($font_h3); }
 
-.t_left { text-align: left; }
-.t_right { text-align: right; }
-.t_center { text-align: center; }
-.t_justify { text-align: justify; }
-.t_wrap { white-space: normal; }
-.t_nowrap { white-space: nowrap; }
-.t_uppercase { text-transform: uppercase; }
-.t_lowercase { text-transform: lowercase; }
-.t_capitalize { text-transform: capitalize; }
-
-.f_inherit { font: inherit; }
-.f_bold { font-weight: bold; }
-.f_italic { font-style: italic; }
-.f_normal {
-  font-weight: normal;
-  font-style: normal;
+%post_content {
+  font-size: rem($font_l);
+  font-family: $alternative_font_family;
 }
 
-.f_s { font-size: rem($font_s); }
-.f_m { font-size: rem($font_m); }
-.f_l { font-size: rem($font_l); }
-
-.c_inherit { color: inherit; }
+@media (max-width: 719px) {
+  html { font-size: #{$default_font_size - 2}px; }
+}

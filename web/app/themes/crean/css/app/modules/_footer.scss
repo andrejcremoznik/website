@@ -1,0 +1,23 @@
+$footer_tx_color: $brand_tx_1 !default;
+$footer_bg_color: $brand_bg_1 !default;
+
+.footer {
+  padding: $basic_offset;
+  color: $footer_tx_color;
+  background: $footer_bg_color;
+  a,
+  a:hover,
+  a:focus { color: inherit; }
+}
+
+.footer__outro { font-style: italic; }
+.footer_license {
+  display: block;
+  font-size: rem($font_s);
+  font-style: normal;
+}
+
+@media (min-width: 720px) {
+  .footer { text-align: right; }
+  .footer__outro { font-size: rem($default_font_size - 1); }
+}

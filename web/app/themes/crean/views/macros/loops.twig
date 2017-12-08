@@ -1,0 +1,3 @@
+{% macro terms(items, prefix) %}
+  {% for item in items %}<a href="{{ item.link }}">{{ prefix|default('') }}{{ item.title }}</a>{% if not loop.last %}, {% endif %}{% endfor %}
+{% endmacro %}

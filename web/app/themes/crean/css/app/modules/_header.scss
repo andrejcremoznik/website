@@ -1,0 +1,23 @@
+$header_tx_color: $brand_tx_1 !default;
+$header_bg_color: $brand_bg_1 !default;
+
+.header {
+  padding: $basic_offset;
+  color: $header_tx_color;
+  background: $header_bg_color;
+}
+
+.header__logo-img {
+  display: block;
+  max-height: 42px;
+  max-width: 100px;
+  fill: none;
+  stroke: $header_tx_color;
+  stroke-width: 15;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+@media (min-width: 720px) {
+  .header__logo-img { float: right; }
+}

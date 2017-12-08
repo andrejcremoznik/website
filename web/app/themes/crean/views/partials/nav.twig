@@ -1,0 +1,14 @@
+<nav class="nav">
+{% spaceless %}
+  <ul class="nav__items">
+  {% for item in primary_navigation.items %}
+    <li class="{{ [
+      'nav__item',
+      item.current ? 'nav__item_active' : 'nav__item_inactive'
+    ]|join(' ') }}">
+      <a class="nav__link" href="{{ item.get_link }}">{{ item.title }}</a>
+    </li>
+  {% endfor %}
+  </ul>
+{% endspaceless %}
+</nav>

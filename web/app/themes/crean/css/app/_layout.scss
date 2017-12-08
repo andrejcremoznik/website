@@ -1,0 +1,27 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header nav"
+    "main main"
+    "footer footer";
+}
+
+.header { grid-area: header; }
+.nav { grid-area: nav; }
+.main { grid-area: main; }
+.footer { grid-area: footer; }
+
+@media (min-width: 720px) {
+  html, body { height: 100%; }
+  body {
+    grid-template-columns: 210px auto;
+    grid-template-rows: 72px + $basic_offset 100fr 1fr;
+    grid-template-areas:
+      "header main"
+      "nav main"
+      "footer main";
+  }
+  .main { max-width: 720px; }
+}
