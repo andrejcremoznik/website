@@ -5,9 +5,9 @@ $footer_bg_color: $brand_bg_1 !default;
   padding: $basic_offset;
   color: $footer_tx_color;
   background: $footer_bg_color;
-  a,
-  a:hover,
-  a:focus { color: inherit; }
+  a { color: $content_link_hover_color; }
+  a:focus,
+  a:hover { color: $content_link_color; }
 }
 
 .footer__outro { font-style: italic; }

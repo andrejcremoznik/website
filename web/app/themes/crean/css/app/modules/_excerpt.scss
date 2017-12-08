@@ -14,7 +14,24 @@
 
 .excerpt__pubdate { margin-right: $basic_offset; }
 
-.excerpt__content {
-  @extend %post_content;
-  margin-top: $basic_offset;
+.excerpt__thumb {
+  float: right;
+  margin: 0 0 5px 15px;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(#000, .2);
 }
+.excerpt__thumb-img {
+  width: 160px;
+  height: 120px;
+}
+.excerpt__thumb-cap {
+  margin-top: 5px;
+  color: $light_text_color;
+  font-size: rem($font_s);
+}
+
+.excerpt__thumb,
+.excerpt__content { margin-top: $basic_offset; }
+
+.excerpt__content { @extend %post_content; }

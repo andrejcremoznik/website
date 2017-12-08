@@ -6,13 +6,13 @@
     <div class="excerpt__pubdate"><b>{{ i18n.published }}</b>: <time datetime="{{ post.date('c') }}">{{ post.date }}</time></div>
     <div class="excerpt__taxonomy"><b>{{ i18n.tagged }}</b>: {{ loop.terms(post.categories) }}, {{ loop.terms(post.tags, '#') }}</div>
   </footer>
-  <div class="excerpt__content">
-    <p>{{ post.get_preview }}</p>
-  </div>
   {% if post.thumbnail %}
     <figure class="excerpt__thumb">
-      <img class="excerpt__thumb-img" src="{{ post.thumbnail.src('thumbnail') }}" alt="{{ post.thumbnail.alt }}">
+      <img class="excerpt__thumb-img" src="{{ post.thumbnail.src('thumbnail') }}" alt="{{ post.thumbnail.alt|e('html_attr') }}">
       <figcaption class="excerpt__thumb-cap">{{ post.thumbnail.caption }}</figcaption>
     </figure>
   {% endif %}
+  <div class="excerpt__content">
+    <p>{{ post.get_preview }}</p>
+  </div>
 </article>

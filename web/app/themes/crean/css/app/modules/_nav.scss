@@ -1,11 +1,8 @@
-$nav_tx_color: $brand_tx_1 !default;
 $nav_bg_color: $brand_bg_1 !default;
+$nav_btn_tx: #fff !default;
+$nav_btn_bg: $brand_tx_2 !default;
 
-.nav {
-  color: $nav_tx_color;
-  background: $nav_bg_color;
-  text-shadow: 0 1px 1px darken($nav_bg_color, 10%);
-}
+.nav { background: $nav_bg_color; }
 
 .nav__items {
   display: flex;
@@ -25,17 +22,21 @@ $nav_bg_color: $brand_bg_1 !default;
 .nav__link {
   display: block;
   padding: .5em 1em;
-  border-radius: 4px;
-  color: inherit;
+  color: $nav_btn_tx;
+  background: $nav_btn_bg;
   text-decoration: none;
+  text-shadow: 0 1px 1px darken($nav_btn_bg, 20%);
+  box-shadow: 0 2px 2px darken($nav_bg_color, 15%);
+  transition: all .2s ease;
   &:focus,
-  &:hover { color: inherit; }
+  &:hover {
+    color: $nav_btn_tx;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 2px darken($nav_bg_color, 15%);
+  }
 }
 
-.nav__item_active > .nav__link {
-  background: lighten($nav_bg_color, 10%);
-  box-shadow: inset 0 3px 10px 2px darken($nav_bg_color, 10%);
-}
+.nav__item_active > .nav__link { font-weight: bold; }
 
 @media (min-width: 720px) {
   .nav { text-align: right; }

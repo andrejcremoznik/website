@@ -192,7 +192,7 @@ class crean extends Timber\Site {
     wp_enqueue_style('default');
 
     // Enqueue scripts
-    wp_enqueue_script('app');
+    // wp_enqueue_script('app');
   }
 
   /**
