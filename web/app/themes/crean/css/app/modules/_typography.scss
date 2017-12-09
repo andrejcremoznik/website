@@ -18,9 +18,15 @@ a {
 
 img { vertical-align: middle; }
 
-p {
+p, ul, ol, blockquote {
   margin: 0 0 #{$default_line_height}em;
   &:last-child { margin-bottom: 0; }
+}
+ul, ol, blockquote { padding-left: 2em; }
+
+blockquote {
+  color: $light_tx_color;
+  font-style: italic;
 }
 
 h1, h2, h3 {

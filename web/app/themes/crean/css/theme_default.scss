@@ -15,9 +15,9 @@ $font_s: 14;
 $font_m: $default_font_size;
 $font_l: 20;
 
-$font_h1: 32;
-$font_h2: 24;
-$font_h3: 20;
+$font_h1: 34;
+$font_h2: 28;
+$font_h3: 24;
 
 // Layout
 $basic_offset: 15px;
@@ -25,11 +25,13 @@ $basic_offset: 15px;
 // Basic colors
 $default_tx_color: #333;
 $default_bg_color: #f4f4f4;
-$light_text_color: #888;
+$light_tx_color: #808080;
 
 $brand_bg_1: #304050;
 $brand_tx_1: #eee;
 $brand_tx_2: #965b44;
+
+$line_color: #d8d8d8;
 
 $content_link_color: $brand_tx_2;
 $content_link_hover_color: lighten($content_link_color, 30%);

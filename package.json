@@ -46,6 +46,7 @@
     ]
   },
   "dependencies": {
+    "luminous-lightbox": "^1.0.1",
     "normalize.css": "^7.0.0"
   },
   "devDependencies": {

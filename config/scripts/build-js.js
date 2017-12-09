@@ -11,7 +11,7 @@ const compress = process.argv[2] === 'minify'
 let plugins = [
   resolve({ jsnext: true }),
   commonjs({ include: 'node_modules/**' }),
-  babel()
+  babel({ exclude: 'node_modules/**' })
 ]
 
 if (compress) {

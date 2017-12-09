@@ -14,10 +14,10 @@ body {
 .footer { grid-area: footer; }
 
 @media (min-width: 720px) {
-  html, body { height: 100%; }
+  html, body { min-height: 100vh; }
   body {
     grid-template-columns: 200px auto;
-    grid-template-rows: 72px + $basic_offset 100fr 1fr;
+    grid-template-rows: 72px + $basic_offset auto 240px;
     grid-template-areas:
       "header main"
       "nav main"

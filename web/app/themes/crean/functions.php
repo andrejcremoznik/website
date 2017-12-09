@@ -86,7 +86,6 @@ class crean extends Timber\Site {
       'password' => __('Password', 'crean'),
       'submit' => __('Submit', 'crean'),
       'comments' => __('Comments', 'crean'),
-      'says' => __('says', 'crean'),
       'published' => __('Published', 'crean'),
       'tagged' => __('Tagged', 'crean')
     ];
@@ -192,7 +191,7 @@ class crean extends Timber\Site {
     wp_enqueue_style('default');
 
     // Enqueue scripts
-    // wp_enqueue_script('app');
+    wp_enqueue_script('app');
   }
 
   /**

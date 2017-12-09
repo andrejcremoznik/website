@@ -1,36 +1,54 @@
 {% extends "base.twig" %}
 
+{% import 'macros/loops.twig' as loops %}
+
 {% block content %}
-<article class="post post_{{ post.post_type }}">
+<article class="post post_{{ post.post_type }}" itemscope itemtype="http://schema.org/LiveBlogPosting">
 
-  <header class="post__header">
-    <h1 class="post__title">{{ post.title }}</h1>
-    <p class="post__meta">
-      <span class="post__date"><time datetime="{{ post.post_date|date('c') }}" pubdate>{{ post.post_date|date }}</time></span>
-      <span class="post__author">{{ i18n.author }}: <a href="{{ post.author.path }}">{{ post.author.name }}</a></span>
-    </p>
-  </header>
+  <h1 class="post__title" itemprop="headline">{{ post.title }}</h1>
 
-  <section class="post__content">
+  <footer class="post__meta">
+    <div class="post__pubdate"><b>{{ i18n.published }}</b>: <time datetime="{{ post.date('c') }}" itemprop="datePublished">{{ post.date }}</time></div>
+    <div class="post__taxonomy"><b>{{ i18n.tagged }}</b>: {{ loops.terms(post.categories) }}, {{ loops.terms(post.tags, '#') }}</div>
+  </footer>
+
+  {% if post.thumbnail %}
+    <figure class="post__thumb">
+      <img
+        class="post__thumb-img"
+        srcset="{{ post.thumbnail.src('medium') }}, {{ post.thumbnail.src('full') }} 1.5x"
+        src="{{ post.thumbnail.src('medium') }}"
+        alt="{{ post.thumbnail.alt|e('html_attr') }}"
+        itemprop="thumbnail">
+      <figcaption class="post__thumb-cap">{{ post.thumbnail.caption }}</figcaption>
+    </figure>
+  {% endif %}
+
+  <section class="post__content" itemprop="articleBody">
     {{ post.content }}
   </section>
 
+{# TODO: Style comments
   {% if post.comments or post.comment_status == 'open' %}
     <section class="comments">
-      <h3 class="comments__title">{{ i18n.comments }}</h3>
+      <h3 class="comments__heading">{{ i18n.comments }}</h3>
       {% if comment_form is defined %}{{ comment_form }}{% endif %}
       {% if post.comments %}
         <div class="comments__list">
         {% for comment in post.comments %}
-          <div class="comment comment_{{ comment.comment_type }}">
-            <p class="comment__author">{{ comment.author.name }} {{ i18n.says }}</p>
-            <div class="comment__content">{{ comment.comment_content|wpautop }}</div>
+          <div class="comment" itemprop="comment">
+            <div class="comment__meta">
+              <time datetime="{{ comment.date('c') }}">{{ comment.date }}</time>,
+              {{ comment.author.name }}
+            </div>
+            <div class="comment__content">{{ comment.content|wpautop }}</div>
           </div>
         {% endfor %}
         </div>
       {% endif %}
     </section>
   {% endif %}
+#}
 
 </article>
 {% endblock %}

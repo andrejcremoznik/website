@@ -7,6 +7,8 @@ $header_bg_color: $brand_bg_1 !default;
   background: $header_bg_color;
 }
 
+.header__logo:focus { outline: 0; }
+
 .header__logo-img {
   display: block;
   max-height: 42px;

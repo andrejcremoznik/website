@@ -1,6 +1,4 @@
-.excerpt {
-  padding: $basic_offset;
-}
+.excerpt { padding: $basic_offset; }
 
 .excerpt__title {
   margin: 0;
@@ -27,7 +25,7 @@
 }
 .excerpt__thumb-cap {
   margin-top: 5px;
-  color: $light_text_color;
+  color: $light_tx_color;
   font-size: rem($font_s);
 }
 
