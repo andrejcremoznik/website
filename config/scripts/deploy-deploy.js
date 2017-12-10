@@ -35,20 +35,23 @@ let deployProcedure = [
     path.join(config.deployPath, 'static/.env'),
     path.join(config.deployReleasePath, '.env')
   ].join(' '),
+  [
+    'ln -s',
+    path.join(config.deployPath, 'static/keybase.txt'),
+    path.join(config.deployReleasePath, 'web/keybase.txt')
+  ].join(' '),
+  [
+    'ln -s',
+    '/srv/http/certs/.well-known',
+    path.join(config.deployReleasePath, 'web/.well-known')
+  ].join(' '),
 
-  // NOTE: If you use Let's Encrypt, you might want to set up a symlink to "certs/.well-known" directory
-  // [
-  //   'ln -s',
-  //   '/srv/http/certs/.well-known',
-  //   path.join(config.deployReleasePath, 'web/.well-known')
-  // ].join(' '),
-
-  // NOTE: If you want to enable object cache on production, copy object-cache.php from the caching plugin to /web/app/
-  // deployEnv === 'production' ? [
-  //   'cp',
-  //   path.join(config.deployReleasePath, 'web/app/plugins/redis-cache/includes/object-cache.php'),
-  //   path.join(config.deployReleasePath, 'web/app/object-cache.php')
-  // ].join(' ') : false, // "false" will drop the item from command chain when condition doesn't match
+  // Copy object cache file to the correct location when deploying to production
+  deployEnv === 'production' ? [
+    'cp',
+    path.join(config.deployReleasePath, 'web/app/plugins/redis-cache/includes/object-cache.php'),
+    path.join(config.deployReleasePath, 'web/app/object-cache.php')
+  ].join(' ') : false, // "false" will drop the item from command chain when condition doesn't match
 
   // Remove previous release dir
   ['rm -fr', path.join(config.deployPath, 'previous')].join(' '),
