@@ -37,6 +37,14 @@ h1 { font-size: rem($font_h1); }
 h2 { font-size: rem($font_h2); }
 h3 { font-size: rem($font_h3); }
 
+code {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: darken($default_bg_color, 8%);
+  font-size: .75em;
+  text-shadow: 0 1px 1px $default_bg_color;
+}
+
 %post_content {
   font-size: rem($font_l);
   font-family: $alternative_font_family;
