@@ -36,12 +36,12 @@ wp plugin deactivate redis-cache wordpress-seo
 echo -e "==> Cleaning up…"
 wp comment delete $(wp comment list --status=spam --format=ids) --force
 wp db query "DELETE FROM wpcrean_posts WHERE post_type = 'revision'"
-wp cache flush
 wp transient delete-all
+wp cache flush
 
 # Do a search-replace on the entire database for site URL
 echo -e "==> Search/replace hostname…"
-wp search-replace https://cremoznik.si http://crean.dev
+wp search-replace cremoznik.si crean.dev
 
 echo -e "==> Flushing rewrite rules…"
 wp rewrite flush

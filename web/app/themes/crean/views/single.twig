@@ -12,10 +12,6 @@
     <div class="post__taxonomy"><b>{{ i18n.tagged }}</b>: {{ loops.terms(post.categories) }}, {{ loops.terms(post.tags, '#') }}</div>
   </footer>
 
-  <section class="post__content" itemprop="articleBody">
-    {{ post.content }}
-  </section>
-
   {% if post.thumbnail %}
     <figure class="post__thumb">
       <img
@@ -27,6 +23,10 @@
       <figcaption class="post__thumb-cap">{{ post.thumbnail.caption }}</figcaption>
     </figure>
   {% endif %}
+
+  <section class="post__content" itemprop="articleBody">
+    {{ post.content }}
+  </section>
 
 {# TODO: Style comments
   {% if post.comments or post.comment_status == 'open' %}

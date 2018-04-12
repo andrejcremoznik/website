@@ -34,7 +34,7 @@ fs.readdir(inDir, (err, files) => {
       if (err) throw err.formatted
 
       postcss(postCssPlugins)
-        .process(result.css)
+        .process(result.css, { from: css, to: css })
         .then(res => {
           res.warnings().forEach(warn => {
             console.log(warn.toString())

@@ -3,6 +3,16 @@
 {% block content %}
 <article class="post post_{{ post.post_type }}">
   <h1 class="post__title">{{ post.title }}</h1>
+  {% if post.thumbnail %}
+    <figure class="post__thumb">
+      <img
+        class="post__thumb-img"
+        srcset="{{ post.thumbnail.src('medium') }}, {{ post.thumbnail.src('full') }} 1.5x"
+        src="{{ post.thumbnail.src('medium') }}"
+        alt="{{ post.thumbnail.alt|e('html_attr') }}">
+      <figcaption class="post__thumb-cap">{{ post.thumbnail.caption }}</figcaption>
+    </figure>
+  {% endif %}
   <section class="post__content">
     {{ post.content }}
   </section>
