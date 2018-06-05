@@ -49,6 +49,12 @@ code {
   font-size: .75em;
   text-shadow: 0 1px 1px $default_bg_color;
 }
+pre > code {
+  display: block;
+  line-height: 1;
+  max-height: 400px;
+  overflow: auto;
+}
 
 %post_content {
   font-size: rem($font_l);
