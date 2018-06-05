@@ -3,6 +3,7 @@ html {
   font-family: $default_font_family;
   font-size: #{$default_font_size}px;
   line-height: $default_line_height;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -13,10 +14,14 @@ body {
 
 a {
   color: $content_link_color;
+  background-color: transparent;
   &:hover { color: $content_link_hover_color; }
 }
 
-img { vertical-align: middle; }
+img {
+  border-style: none;
+  vertical-align: middle;
+}
 
 p, ul, ol, blockquote {
   margin: 0 0 #{$default_line_height}em;
