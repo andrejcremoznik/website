@@ -51,9 +51,12 @@ code {
 }
 pre > code {
   display: block;
-  line-height: 1;
   max-height: 400px;
+  padding: 10px;
+  border: 1px solid darken($default_bg_color, 32%);
+  border-radius: 0;
   overflow: auto;
+  white-space: pre-wrap;
 }
 
 %post_content {
