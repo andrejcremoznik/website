@@ -36,7 +36,7 @@ wp plugin deactivate redis-cache wordpress-seo
 echo -e "==> Cleaning up…"
 wp comment delete $(wp comment list --status=spam --format=ids) --force
 wp db query "DELETE FROM wpcrean_posts WHERE post_type = 'revision'"
-wp transient delete-all
+wp transient delete --all
 wp cache flush
 
 # Do a search-replace on the entire database for site URL
@@ -48,8 +48,5 @@ wp rewrite flush
 
 echo -e "==> Creating admin account for development (login: dev / dev)"
 wp user create dev dev@dev.dev --user_pass=dev --role=administrator
-
-echo -e "==> Optimizing database…"
-wp db optimize
 
 echo -e "==> Done."

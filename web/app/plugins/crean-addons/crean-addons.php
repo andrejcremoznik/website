@@ -150,17 +150,18 @@ class crean_Addons {
     if (!is_admin()) {
       wp_embed_register_handler(
         'gist',
-        '#(https://gist.github.com/([^\/]+\/)?([a-zA-Z0-9]+)(\/[a-zA-Z0-9]+)?)(\#file(\-|_)(.+))?$#i',
+        '|https://gist\.github\.com/(\w+)/(\w+)#file-(.+)|i',
         [$this, 'gist_embed_handler']
       );
     }
   }
   public function gist_embed_handler($matches, $attr, $url, $rawattr) {
-    //die(var_dump($matches));
     return sprintf(
-      '<div><script src="%s.js%s"></script></div>',
-      $matches[1],
-      isset($matches[7]) ? '?file=' . $matches[7] : ''
+      '<div class="gist" data-user="%s" data-id="%s" data-file="%s">%s</div>',
+      isset($matches[1]) ? esc_attr($matches[1]) : '', // gist username
+      isset($matches[2]) ? esc_attr($matches[2]) : '', // gist id
+      isset($matches[3]) ? esc_attr($matches[3]) : '', // gist file name
+      isset($matches[0]) ? esc_html($matches[0]) : ''  // gist full link
     );
   }
 

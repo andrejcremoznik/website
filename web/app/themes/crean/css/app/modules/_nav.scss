@@ -2,13 +2,14 @@ $nav_bg_color: $brand_bg_1 !default;
 $nav_btn_tx: #fff !default;
 $nav_btn_bg: $brand_tx_2 !default;
 
-.nav { background: $nav_bg_color; }
+.nav {
+  padding: round($basic_offset / 3);
+  background: $nav_bg_color;
+}
 
 .nav__items {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  height: 100%;
+  flex-wrap: wrap;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -16,7 +17,8 @@ $nav_btn_bg: $brand_tx_2 !default;
 
 .nav__item {
   flex: 0 1 auto;
-  margin-right: $basic_offset;
+  margin: round($basic_offset / 3);
+  white-space: nowrap;
 }
 
 .nav__link {
@@ -40,10 +42,12 @@ $nav_btn_bg: $brand_tx_2 !default;
 .nav__item_active > .nav__link { font-weight: bold; }
 
 @media (min-width: 720px) {
-  .nav { text-align: right; }
+  .nav {
+    padding: 0;
+    text-align: right;
+  }
   .nav__items {
     display: block;
-    height: auto;
     padding: 0 $basic_offset;
   }
   .nav__item { margin: 0 0 $basic_offset; }

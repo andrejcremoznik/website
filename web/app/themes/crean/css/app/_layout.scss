@@ -3,12 +3,13 @@ body { margin: 0; }
 @supports (display: grid) {
   body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-    "header nav"
-    "main main"
-    "footer footer";
+    "nav"
+    "main"
+    "header"
+    "footer";
   }
 
   .header { grid-area: header; }

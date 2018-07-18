@@ -185,7 +185,7 @@ class crean extends Timber\Site {
     wp_register_style('default', get_template_directory_uri() . '/assets/theme_default.css', [], $this->asset_version, 'all');
 
     // Register scripts
-    wp_register_script('app', get_template_directory_uri() . '/assets/app.js', [], $this->asset_version, true);
+    wp_register_script('app', get_template_directory_uri() . '/assets/app.js', ['jquery-core'], $this->asset_version, true);
 
     // Enqueue styles
     wp_enqueue_style('default');

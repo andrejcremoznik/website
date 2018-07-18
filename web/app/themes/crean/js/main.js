@@ -1,6 +1,7 @@
 /*! crean | MIT License | https://keybase.io/andrejcremoznik */
 
 import Lightbox from './modules/lightbox'
+import Gist from './modules/gist'
 
 const runners = {
   // default: function () {
@@ -8,6 +9,7 @@ const runners = {
   // },
   'single-post': function () {
     Lightbox()
+    document.querySelectorAll('.gist').forEach(Gist)
   }
 }
 
