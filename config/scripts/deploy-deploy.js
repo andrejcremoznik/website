@@ -32,6 +32,16 @@ let deployProcedure = [
   ].join(' '),
   [
     'ln -s',
+    path.join(config.deployPath, 'static/files'),
+    path.join(config.deployReleasePath, 'web/app/files')
+  ].join(' '),
+  [
+    'ln -s',
+    path.join(config.deployPath, 'static/emoji'),
+    path.join(config.deployReleasePath, 'web/app/emoji')
+  ].join(' '),
+  [
+    'ln -s',
     path.join(config.deployPath, 'static/.env'),
     path.join(config.deployReleasePath, '.env')
   ].join(' '),
