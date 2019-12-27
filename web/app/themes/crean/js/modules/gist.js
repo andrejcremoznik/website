@@ -9,20 +9,19 @@ const Gist = (node) => {
     return
   }
 
-
   $.ajax({
     url: `https://gist.github.com/${user}/${id}.json?file=${file}&callback=?`,
     dataType: 'json',
     method: 'GET'
   })
-  .done((rsp) => {
-    $(node).replaceWith(rsp.div)
-    if (!styles && rsp.stylesheet) {
-      $(document.head).append($('<link/>', { rel: 'stylesheet', href: rsp.stylesheet }))
-      styles = true
-    }
-  })
-  .fail(() => { console.log('Error loading Gist.') })
+    .done((rsp) => {
+      $(node).replaceWith(rsp.div)
+      if (!styles && rsp.stylesheet) {
+        $(document.head).append($('<link/>', { rel: 'stylesheet', href: rsp.stylesheet }))
+        styles = true
+      }
+    })
+    .fail(() => { console.log('Error loading Gist.') })
 }
 
 export default Gist

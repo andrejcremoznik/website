@@ -77,35 +77,33 @@ let deployProcedure = [
     config.deployReleasePath,
     path.join(config.deployPath, 'current')
   ].join(' '),
+
+  // Clear cache on production
+  deployEnv === 'production' ? ['wp transient delete --all --path=', path.join(config.deployPath, 'current/web/wp')].join('') : false,
+  deployEnv === 'production' ? ['wp cache flush --path=', path.join(config.deployPath, 'current/web/wp')].join('') : false,
   // Remove uploaded build tarball
   ['rm -f', config.deployTmp].join(' ')
 ].filter(cmd => cmd).join(' && ')
 
 // Run
-let ssh = new NodeSSH()
+const ssh = new NodeSSH()
 console.log(`==> Deploying to: ${deployEnv}`)
 ssh.connect(config.deploySSH)
-.then(() => {
-  console.log(`==> Connected. Uploading…`)
-  ssh.putFile('build/build.tar.gz', config.deployTmp)
+  .then(() => {
+    console.log(`==> Connected. Uploading…`)
+    return ssh.putFile('build/build.tar.gz', config.deployTmp)
+  })
   .then(() => {
     console.log(`==> Applying new build…`)
-    ssh.execCommand(deployProcedure)
-    .then(() => {
-      console.log(`==> Done.`)
-      process.exit()
-    })
-    .catch(err => {
-      console.error(`==> Couldn’t apply build.`)
-      throw err
-    })
+    return ssh.execCommand(deployProcedure)
+  })
+  .then(() => {
+    console.log(`==> Done.`)
+    ssh.dispose()
   })
   .catch(err => {
-    console.error(`==> Upload failed.`)
-    throw err
+    console.error(`==> Failed.`)
+    console.log(err)
+    process.exitCode = 1
+    ssh.dispose()
   })
-})
-.catch(err => {
-  console.error(`==> Connection failed.`)
-  throw err
-})

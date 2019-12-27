@@ -32,22 +32,20 @@ let revertProcedure = [
 ].filter(cmd => cmd).join(' && ')
 
 // Run
-let ssh = new NodeSSH()
+const ssh = new NodeSSH()
 console.log(`==> Reverting to previous deploy on: ${deployEnv}`)
 ssh.connect(config.deploySSH)
-.then(() => {
-  console.log(`==> Connected.`)
-  ssh.execCommand(revertProcedure)
+  .then(() => {
+    console.log(`==> Connected.`)
+    return ssh.execCommand(revertProcedure)
+  })
   .then(() => {
     console.log(`==> Done.`)
-    process.exit()
+    ssh.dispose()
   })
   .catch(err => {
     console.error(`==> Failed.`)
-    throw err
+    console.log(err)
+    process.exitCode = 1
+    ssh.dispose()
   })
-})
-.catch(err => {
-  console.error(`==> Connection failed.`)
-  throw err
-})
