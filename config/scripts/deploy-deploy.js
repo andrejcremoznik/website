@@ -13,32 +13,21 @@ const config = {
   deploySSH: deployConf['deployEnvSSH'][deployEnv],
   deployPath: deployConf['deployEnvPaths'][deployEnv],
   deployReleasePath: path.join(deployConf['deployEnvPaths'][deployEnv], version),
-  deployTmp: '/tmp/build.tar.gz'
+  deployTmp: '/tmp/build.tar.gz',
+  wpCliPath: path.join(deployConf['deployEnvPaths'][deployEnv], 'current/web/wp')
 }
 
 // Build bash shell command to exeute on the server
 let deployProcedure = [
   // Create new release dir
-  ['mkdir -p', config.deployReleasePath].join(' '),
-
+  `mkdir -p ${config.deployReleasePath}`,
   // Extract uploaded tarball to new release dir
-  ['tar -zxf', config.deployTmp, '-C', config.deployReleasePath].join(' '),
-
+  `tar -zxf ${config.deployTmp} -C ${config.deployReleasePath}`,
   // Symlink static files into the new release dir
   [
     'ln -s',
     path.join(config.deployPath, 'static/uploads'),
     path.join(config.deployReleasePath, 'web/app/uploads')
-  ].join(' '),
-  [
-    'ln -s',
-    path.join(config.deployPath, 'static/files'),
-    path.join(config.deployReleasePath, 'web/app/files')
-  ].join(' '),
-  [
-    'ln -s',
-    path.join(config.deployPath, 'static/emoji'),
-    path.join(config.deployReleasePath, 'web/app/emoji')
   ].join(' '),
   [
     'ln -s',
@@ -55,7 +44,6 @@ let deployProcedure = [
     '/srv/http/certs/.well-known',
     path.join(config.deployReleasePath, 'web/.well-known')
   ].join(' '),
-
   // Copy object cache file to the correct location when deploying to production
   deployEnv === 'production' ? [
     'cp',
@@ -64,25 +52,17 @@ let deployProcedure = [
   ].join(' ') : false, // "false" will drop the item from command chain when condition doesn't match
 
   // Remove previous release dir
-  ['rm -fr', path.join(config.deployPath, 'previous')].join(' '),
+  `rm -fr ${path.join(config.deployPath, 'previous')}`,
   // Move current release to previous
-  [
-    'mv',
-    path.join(config.deployPath, 'current'),
-    path.join(config.deployPath, 'previous')
-  ].join(' '),
+  `mv ${path.join(config.deployPath, 'current')} ${path.join(config.deployPath, 'previous')}`,
   // Move new release to current
-  [
-    'mv',
-    config.deployReleasePath,
-    path.join(config.deployPath, 'current')
-  ].join(' '),
-
-  // Clear cache on production
-  deployEnv === 'production' ? ['wp transient delete --all --path=', path.join(config.deployPath, 'current/web/wp')].join('') : false,
-  deployEnv === 'production' ? ['wp cache flush --path=', path.join(config.deployPath, 'current/web/wp')].join('') : false,
+  `mv ${config.deployReleasePath} ${path.join(config.deployPath, 'current')}`,
+  // NOTE: Clear cache on production
+  // deployEnv === 'production' ? `wp timber clear_cache --path=${config.wpCliPath}` : false,
+  deployEnv === 'production' ? `wp transient delete --all --path=${config.wpCliPath}` : false,
+  deployEnv === 'production' ? `wp cache flush --path=${config.wpCliPath}` : false,
   // Remove uploaded build tarball
-  ['rm -f', config.deployTmp].join(' ')
+  `rm -f ${config.deployTmp}`
 ].filter(cmd => cmd).join(' && ')
 
 // Run
@@ -99,11 +79,12 @@ ssh.connect(config.deploySSH)
   })
   .then(() => {
     console.log(`==> Done.`)
-    ssh.dispose()
   })
   .catch(err => {
     console.error(`==> Failed.`)
     console.log(err)
     process.exitCode = 1
+  })
+  .finally(() => {
     ssh.dispose()
   })

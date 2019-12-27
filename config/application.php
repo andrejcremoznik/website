@@ -8,7 +8,7 @@ if (!file_exists($root_dir . '/.env')) {
   die('<b>.env<b/> not found. Please configure your environment.');
 }
 
-$dotenv = new Dotenv\Dotenv($root_dir);
+$dotenv = Dotenv\Dotenv::createImmutable($root_dir);
 $dotenv->load();
 $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD', 'DB_PREFIX', 'WP_HOME', 'WP_SITEURL']);
 

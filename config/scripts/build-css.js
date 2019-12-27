@@ -9,20 +9,19 @@ const compress = process.argv[2] === 'minify'
 const inDir = path.resolve('./web/app/themes/crean/css')
 const outDir = path.resolve('./web/app/themes/crean/assets')
 
-const postCssPlugins = [
-  autoprefixer({ cascade: false })
-]
-
+const postCssPlugins = []
 if (compress) {
   postCssPlugins.push(csso({ comments: true }))
 }
+postCssPlugins.push(autoprefixer({ cascade: false }))
 
 fs.readdir(inDir, (err, files) => {
   if (err) throw err
-  files.filter(file => file.substr(-4) === 'scss').forEach(scss => {
+
+  files.filter(file => file.substring(file.length - 4) === 'scss').forEach(scss => {
     const fileObj = path.parse(path.join(inDir, scss))
-    const css = path.join(outDir, [fileObj.name, '.css'].join(''))
-    const map = [css, '.map'].join('')
+    const css = path.join(outDir, `${fileObj.name}.css`)
+    const map = `${css}.map`
 
     sass.render({
       file: path.join(fileObj.dir, fileObj.base),

@@ -8,7 +8,7 @@ const resolve = require('rollup-plugin-node-resolve')
 const compress = process.argv[2] === 'minify'
 
 const plugins = [
-  resolve({ jsnext: true }),
+  resolve(),
   commonjs({ include: 'node_modules/**' }),
   babel({ exclude: 'node_modules/**' })
 ]
@@ -31,7 +31,7 @@ rollup.rollup({
 })
   .then(bundle => bundle.write({
     file: path.join(path.resolve('./web/app/themes/crean/assets'), 'app.js'),
-    format: 'umd',
+    format: 'iife',
     name: 'crean',
     sourcemap: !compress,
     globals: {
