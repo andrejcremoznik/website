@@ -8,11 +8,11 @@
     "lang": "node config/scripts/build-lang.js",
     "watch:css": "watch 'npm run css' web/app/themes/crean/css/ --wait=2 --ignoreDotFiles",
     "watch:js": "watch 'npm run js' web/app/themes/crean/js/ --wait=2 --ignoreDotFiles",
-    "watch": "npm-run-all --parallel watch:*",
+    "watch": "npm-run-all --parallel --silent watch:*",
     "clean": "shx rm -fr build",
-    "build": "npm-run-all 'css minify' 'js minify' lang",
+    "build": "npm-run-all --sequential 'css minify' 'js minify' lang",
     "pack": "node config/scripts/deploy-pack.js",
-    "predeploy": "npm-run-all clean build pack",
+    "predeploy": "npm-run-all --sequential clean build pack",
     "deploy": "node config/scripts/deploy-deploy.js",
     "postdeploy": "npm run clean",
     "deploy:revert": "node config/scripts/deploy-revert.js",
@@ -20,49 +20,42 @@
   },
   "browserslist": [
     "last 2 Chrome versions",
-    "last 2 Firefox versions",
-    "last 2 Edge versions",
-    "Safari 11"
+    "last 2 Firefox versions"
   ],
   "babel": {
     "presets": [
       [
-        "env",
+        "@babel/preset-env",
         {
-          "targets": {
-            "browsers": [
-              "last 2 Chrome versions",
-              "last 2 Firefox versions",
-              "last 2 Edge versions",
-              "Safari 11"
-            ]
-          },
           "modules": false
         }
       ]
     ],
     "plugins": [
-      "external-helpers"
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "crean"
     ]
   },
   "dependencies": {
-    "luminous-lightbox": "^2.0.1"
+    "luminous-lightbox": "^2.3.2"
   },
   "devDependencies": {
-    "autoprefixer": "^9.0.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.7.0",
-    "node-sass": "^4.9.2",
-    "node-ssh": "^5.1.2",
-    "npm-run-all": "^4.1.3",
-    "postcss": "^7.0.0",
-    "postcss-csso": "^3.0.0",
-    "rollup": "^0.63.2",
-    "rollup-plugin-babel": "^3.0.7",
-    "rollup-plugin-babel-minify": "^5.0.0",
-    "rollup-plugin-commonjs": "^9.1.3",
-    "rollup-plugin-node-resolve": "^3.3.0",
-    "shelljs": "^0.8.2",
+    "autoprefixer": "^9.7.3",
+    "node-sass": "^4.13.0",
+    "node-ssh": "^7.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^7.0.25",
+    "postcss-csso": "^4.0.0",
+    "rollup": "^1.27.14",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-babel-minify": "^9.1.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "shelljs": "^0.8.3",
     "shx": "^0.3.2",
     "watch": "^1.0.2"
   }
